@@ -1,0 +1,13 @@
+15/09/2025 22:37
+对终端命令的本质的理解
+使用 $ test.exe < in.txt > out.txt 命令实现重定向时，发现未找到 test.exe 这个命令，查询后发现时 bash 默认不会在当前目录中查找可执行文件，需要
+使用 ./test.exe 来指定当前目录，然后ai给我举了个 ls 的例子：“比如你写了一个 ls.exe，直接打 ls 会优先调用系统的 ls 命令，而 ./ls 才会调用你当前
+目录的 ls.exe”，我由此联想到既然 ls 也是个 .exe 程序，那在终端里使用的其他命令也只是一些可执行程序文件呢？
+我将我的猜想发给ai之后，发现我的猜想绝大部分是正确的：
+    1. 日常用的 ls（Unix）、dir（Windows）、cp（Unix）、copy（Windows）、ping、gcc 等，都属于外部命令—— 它们本质上是独立的可执行文件，只是被放在了系
+        统默认的 “命令搜索路径”（PATH 环境变量指定的目录）中，所以终端能直接找到并运行。
+    2. 有少数命令（如 cd、echo、exit）是内置命令—— 它们不是独立的可执行文件，而是直接集成在 Shell（如 Linux 的 bash、Windows 的 cmd/PowerShell）内部
+        的功能，由 Shell 本身直接处理
+    3. 区分：Unix/Linux 中用 type 命令；Windows cmd 中用 help 命令 或 where 命令。ucrt64 的 bash.exe 里对二者都兼容。
+启发：自己写的程序只要放到 PATH 目录中，也能像系统命令一样直接输入文件名运行（比如把自己写的 mycmd.exe 放到 C:\Windows\System32，就能在终端直接输入
+mycmd 执行，这也是 “命令行工具开发” 的基础逻辑。
