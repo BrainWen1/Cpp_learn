@@ -1,0 +1,87 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "4.1.0"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "chapter_2",
+					"jsonFile" : "directory-chapter_2-Debug-51fafd0c807ea3e83d5e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "4.1.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "chapter_2",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "cmake_study"
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "24",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "aa::@890113df018e74392cc1",
+					"jsonFile" : "target-aa-Debug-4ec085b5b20e7bd2caf4.json",
+					"name" : "aa",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/C++/build",
+		"source" : "D:/C++"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 8
+	}
+}

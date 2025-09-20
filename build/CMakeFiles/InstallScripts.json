@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"D:/C++/build/cmake_install.cmake",
+		"D:/C++/build/chapter_2/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

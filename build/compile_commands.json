@@ -1,0 +1,14 @@
+[
+{
+  "directory": "D:/C++/build/chapter_2",
+  "command": "C:/msys64/ucrt64/bin/g++.exe   -g -o CMakeFiles/aa.dir/2_4.cpp.obj -c D:/C++/chapter_2/2_4.cpp",
+  "file": "D:/C++/chapter_2/2_4.cpp",
+  "output": "chapter_2/CMakeFiles/aa.dir/2_4.cpp.obj"
+},
+{
+  "directory": "D:/C++/build/chapter_2",
+  "command": "C:/msys64/ucrt64/bin/g++.exe   -g -o CMakeFiles/aa.dir/24def.cpp.obj -c D:/C++/chapter_2/24def.cpp",
+  "file": "D:/C++/chapter_2/24def.cpp",
+  "output": "chapter_2/CMakeFiles/aa.dir/24def.cpp.obj"
+}
+]

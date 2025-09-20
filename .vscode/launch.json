@@ -6,9 +6,9 @@
       "name": "C/C++ Debug",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
+      "program": "${command:cmake.launchTargetPath}", // 让 CMake Tools 自动定位可执行文件
       "miDebuggerPath": "C:/msys64/ucrt64/bin/gdb.exe",
-      "preLaunchTask": "C++: g++ 编译",
+      "preLaunchTask": "CMake: Build", // 调试前自动执行 CMake 构建，确保使用最新编译结果
       "environment": [
         {
           "name": "PATH",

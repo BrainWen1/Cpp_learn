@@ -1,4 +1,14 @@
 {
+  // CMake
+  // 指定 MSYS2 UCRT64 的 CMake 路径
+  "cmake.cmakePath": "C:/msys64/ucrt64/bin/cmake.exe",
+
+  // 生成与 UCRT64 的 make 兼容的 Makefile
+  "cmake.generator": "Unix Makefiles",
+
+  // 让 C/C++ 插件依赖 CMake Tools 的配置（自动识别头文件路径、编译器）
+  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+
   // 语言文件关联（避免 .h 文件被误识别）
   "files.associations": {
     "*.h": "cpp",
@@ -56,9 +66,7 @@
     "variant": "cpp"
   },
 
-  // 旧版（兼容，但可能被忽略）
-  "python.pythonPath": "C:/msys64/ucrt64/bin/python3.exe",  
-  // 新版（强制生效）
+  // 新版 vscode 指定 Python 解释器的方式
   "python.defaultInterpreterPath": "C:/msys64/ucrt64/bin/python3.exe",  
   "python.linting.pylintEnabled": false,
 
