@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 4.1.0)
-project(24)
+project(learn)
 
-add_executable(aa 2_4.cpp 24def.cpp)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_executable(a 2_5.cpp)
