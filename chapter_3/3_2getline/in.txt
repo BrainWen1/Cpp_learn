@@ -1,0 +1,6 @@
+
+There are some strings that include the space 
+and new line, and also inclue some punctuations int there.
+
+I write this txt file to test tthe GETLINE function.
+ok, this is the end of this txt file;
