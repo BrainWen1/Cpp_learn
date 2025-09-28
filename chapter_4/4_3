@@ -1,0 +1,8 @@
+// 逻辑和关系运算符
+#include <iostream>
+
+int main(void) {
+
+    // 短路求值
+    
+}
