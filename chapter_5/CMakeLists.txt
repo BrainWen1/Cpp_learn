@@ -2,12 +2,12 @@
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
 # 2. 添加可执行目标（当前目录的源文件）
-add_executable(4_11 4_11.cpp)
+add_executable(5_1 5_1.cpp)
 
 # 3. 目标专属编译选项（警告、优化等，仅对当前目录的目标生效）
 # 针对GCC/Clang添加严格警告
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    foreach(target 4_11)
+    foreach(target 5_1)
         target_compile_options(
             ${target} PRIVATE
             -Wall                # 基础警告

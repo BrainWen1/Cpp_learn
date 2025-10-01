@@ -27,7 +27,8 @@ endif()
 # 每个子目录有自己的CMakeLists.txt
 # add_subdirectory(chapter_2)
 # add_subdirectory(chapter_3)
-add_subdirectory(chapter_4)
+# add_subdirectory(chapter_4)
+add_subdirectory(chapter_5)
 
 # 7. 代码格式化工具（ClangFormat）- 全局工具配置
 find_program(CLANG_FORMAT_EXECUTABLE clang-format)
@@ -47,4 +48,4 @@ if(CLANG_FORMAT_EXECUTABLE)
 endif()
 
 # 8. 集成测试框架（CTest）- 全局测试配置
-enable_testing()  # 启用测试功能，子目录可添加具体测试用例
+# enable_testing()  # 启用测试功能，子目录可添加具体测试用例
