@@ -2,18 +2,30 @@
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
 # 2. 添加可执行目标（当前目录的源文件）
-add_executable(5_1 5_1.cpp)
+set(SOURCE_FILE 5_3)
+add_executable(${SOURCE_FILE} ${SOURCE_FILE}.cpp)
 
 # 3. 目标专属编译选项（警告、优化等，仅对当前目录的目标生效）
 # 针对GCC/Clang添加严格警告
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    foreach(target 5_1)
+    # 开启基本警告
+    set(BASIC_WARNINGS 
+        -Wall                # 基础警告
+        -Wextra              # 额外警告
+        -Wpedantic           # 严格遵循 C++ 标准
+    )
+    # 忽略部分警告
+    set(DISABLED_WARNINGS
+        -Wno-unused-variable # 未使用变量
+        -Wno-dangling-else   # 悬垂else
+        -Wno-empty-body      # 空语句体
+    )
+
+    foreach(target ${SOURCE_FILE})
         target_compile_options(
             ${target} PRIVATE
-            -Wall                # 基础警告
-            -Wextra              # 额外警告
-            -Wpedantic           # 严格遵循 C++ 标准
-            -Wno-unused-variable # 禁用“未使用变量”的警告
+            ${BASIC_WARNINGS}
+            ${DISABLED_WARNINGS}
         )
     endforeach()    
 endif()
