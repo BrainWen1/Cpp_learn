@@ -105,7 +105,7 @@ int main(void) {
     // 5.9
     unsigned aCnt = 0, eCnt = 0, iCnt = 0, oCnt = 0, uCnt = 0;
     char ch = 0;
-    /*while(cin >> ch) {
+    while(cin >> ch) {
         if(ch == 'a') {
             ++aCnt;
         } else if(ch == 'e') {
@@ -145,9 +145,70 @@ int main(void) {
         }
     }
     cout << "a: " << aCnt << "  e: " << eCnt << "  i: " << iCnt
-        << "  o: " << oCnt << "  u: " << uCnt << endl;*/
+        << "  o: " << oCnt << "  u: " << uCnt << endl;
 
     // 5.11
+    aCnt = 0, eCnt = 0, iCnt = 0, oCnt = 0, uCnt = 0;
+    int spcCnt = 0, tabCnt = 0, newlCnt = 0;
+    
+    int chr = 0;
+    while((chr = getchar()) != EOF && ch != 2) {
+        switch(chr) {
+            case 'a': case 'A':
+                ++aCnt;
+                break;
+            case 'e': case 'E':
+                ++eCnt;
+                break;
+            case 'i': case 'I':
+                ++iCnt;
+                break;
+            case 'o': case 'O':
+                ++oCnt;
+                break;
+            case 'u': case 'U':
+                ++uCnt;
+                break;
+            case ' ':
+                ++spcCnt;
+                break;
+            case '\t':
+                ++tabCnt;
+                break;
+            case '\n':
+                ++newlCnt;
+                break;
+
+            default:
+                break;
+        }
+    }
+    cout << "a: " << aCnt << "  e: " << eCnt << "  i: " << iCnt
+        << "  o: " << oCnt << "  u: " << uCnt << endl << 
+        "space: " << spcCnt << "  tab: " << tabCnt << "  newline: " << newlCnt;
+    
+    // 5.12
+    int prev = 0;
+    int ffCnt = 0, flCnt = 0, fiCnt = 0;
+    while((chr = getchar()) != EOF) {
+        if('f' == prev) {
+            switch(chr) {
+                case 'f':
+                    ++ffCnt;
+                    break;
+                case 'l':
+                    ++flCnt;
+                    break;
+                case 'i':
+                    ++fiCnt;
+                    break;
+                default:
+                    break;
+            }
+        }
+        prev = chr;
+    }
+    cout << "ff: " << ffCnt << "  fl: " << flCnt << "  fi: " << fiCnt << endl;
 
     return 0;
 }

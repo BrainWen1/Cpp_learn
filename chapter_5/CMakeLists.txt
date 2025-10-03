@@ -19,6 +19,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
         -Wno-unused-variable # 未使用变量
         -Wno-dangling-else   # 悬垂else
         -Wno-empty-body      # 空语句体
+        -Wno-unused-but-set-variable #初始化未使用变量
     )
 
     foreach(target ${SOURCE_FILE})
