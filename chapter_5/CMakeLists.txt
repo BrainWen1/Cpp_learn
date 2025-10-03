@@ -2,7 +2,7 @@
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
 # 2. 添加可执行目标（当前目录的源文件）
-set(SOURCE_FILE 5_3)
+set(SOURCE_FILE 5_4)
 add_executable(${SOURCE_FILE} ${SOURCE_FILE}.cpp)
 
 # 3. 目标专属编译选项（警告、优化等，仅对当前目录的目标生效）
