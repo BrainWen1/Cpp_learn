@@ -5,12 +5,14 @@
 #include <vector>
 #include <iterator>
 #include <iterator>
+#include <initializer_list>
 
 using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
 using std::vector;
+using std::initializer_list;
 
 using vec_i = vector<int>;
 // 6.2.1
@@ -95,6 +97,25 @@ void print_3(int i, const int *begin, const int *end) {
     cout << endl;
 }
 
+// 6.2.6
+// 6.27
+int add(initializer_list<int> val_list) {
+    cout << val_list.size() << ": ";
+    int sum = 0;
+    for(auto it = val_list.begin(); it != val_list.end(); ++it) {
+        sum += *it;
+    }
+    return sum;
+}
+
+void error_msg(int val, initializer_list<string> il) {
+    cout << val << ": ";
+    for(const auto &elem : il) {
+        cout << elem << " ";
+    }
+    cout << endl;
+}
+
 int main(int argc, char *argv[]) {
 
     // 传值参数
@@ -145,6 +166,9 @@ int main(int argc, char *argv[]) {
     }
     cout << str << endl;
     cout << s << endl;
+
+    // 含有可变形参的函数
+    cout << add({1, 2, 3, 4, 5, 6, 7, 8, 9, 10}) << endl;
 
     return 0;    
 }
