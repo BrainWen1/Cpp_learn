@@ -29,7 +29,8 @@ endif()
 # add_subdirectory(chapter_3)
 # add_subdirectory(chapter_4)
 # add_subdirectory(chapter_5)
-add_subdirectory(chapter_6)
+# add_subdirectory(chapter_6)
+add_subdirectory(chapter_7)
 
 # 7. 代码格式化工具（ClangFormat）- 全局工具配置
 find_program(CLANG_FORMAT_EXECUTABLE clang-format)
