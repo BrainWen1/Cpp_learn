@@ -4,7 +4,10 @@
 #include <iostream>
 #include <string>
 
-struct Person {
+class Person {
+    friend std::istream &read(std::istream &is, Person &item);
+    friend std::ostream &print(std::ostream &os, const Person &item);
+public:
     // 构造函数
     Person() : name(), address() {}
 
@@ -13,9 +16,10 @@ struct Person {
     Person(std::string na, std::string ad)
         : name(na), address(ad) {}
 
-    // 成员函数
+    Person(std::istream &is) { read(is, *this); }
+    // 操作
 
-
+private:
     // 数据成员
     std::string name;
     std::string address;
