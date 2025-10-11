@@ -10,61 +10,96 @@ int main(void) {
 
     // 7.1.1
     // 7.1
-    /*typedef struct My_Sales_data {
-        std::string bookID;
-        double price{0.0};
-        unsigned units_sold{0};
-        double revenue{0.0};
-        std::string bookSort;
-    }My_Sales_data;
-    
-    My_Sales_data total;
-    if(cin >> total.bookID && cin >> total.units_sold && cin >> total.price) {
-        total.revenue = total.units_sold * total.price;
-        My_Sales_data trans;
+    {
+        typedef struct My_Sales_data {
+            std::string bookID;
+            double price{0.0};
+            unsigned units_sold{0};
+            double revenue{0.0};
+            std::string bookSort;
+        }My_Sales_data;
+        
+        My_Sales_data total;
+        if(cin >> total.bookID && cin >> total.units_sold && cin >> total.price) {
+            total.revenue = total.units_sold * total.price;
+            My_Sales_data trans;
 
-        while(cin >> total.bookID && cin >> total.units_sold && cin >> total.price) {
-            if(total.bookID == trans.bookID) {
-                total.revenue = (total.units_sold * total.price) + (trans.units_sold * trans.price);
-                total.price = total.revenue / (total.units_sold + trans.units_sold);
-                total.units_sold += trans.units_sold;
-            } else {
-                cout << total.bookID << " " << total.units_sold << " " << total.price << endl;
-                total.bookID = trans.bookID;
-                total.units_sold = trans.units_sold;
-                total.price = trans.price;
-                total.revenue = trans.revenue;
+            while(cin >> total.bookID && cin >> total.units_sold && cin >> total.price) {
+                if(total.bookID == trans.bookID) {
+                    total.revenue = (total.units_sold * total.price) + (trans.units_sold * trans.price);
+                    total.price = total.revenue / (total.units_sold + trans.units_sold);
+                    total.units_sold += trans.units_sold;
+                } else {
+                    cout << total.bookID << " " << total.units_sold << " " << total.price << endl;
+                    total.bookID = trans.bookID;
+                    total.units_sold = trans.units_sold;
+                    total.price = trans.price;
+                    total.revenue = trans.revenue;
+                }
             }
+            cout << total.bookID << " " << total.units_sold << " " << total.price << endl;
+        } else {
+            std::cerr << "No data?" << endl;
+            return -1;
         }
-        cout << total.bookID << " " << total.units_sold << " " << total.price << endl;
-    } else {
-        std::cerr << "No data?" << endl;
-        return -1;
-    }*/
+    }
 
     // 定义改进的Sales_data类
     // 7.1.2
     // 7.2
-    Sales_data total;
-    if(read(cin, total)) {
-        Sales_data trans;
+    {
+        Sales_data total;
+        if(read(cin, total)) {
+            Sales_data trans;
 
-        while(read(cin, trans)) {
-            if(trans.isbn() == total.isbn()) {
-                total.combine(trans);
-            } else {
-                print(cout, total) << endl;
-                total = trans;
+            while(read(cin, trans)) {
+                if(trans.isbn() == total.isbn()) {
+                    total.combine(trans);
+                } else {
+                    print(cout, total) << endl;
+                    total = trans;
+                }
             }
+            print(cout, total);
+        } else {
+            std::cerr << "No data?!" << endl;
         }
-        print(cout, total);
-    } else {
-        std::cerr << "No data?!" << endl;
     }
-
     // 构造函数
     // 7.1.4
     // 7.11
+    {
+        Sales_data s1; // 默认构造函数
+        Sales_data s2("0-221-73411-K");
+        Sales_data s3("0-241-70091-X ", 2, 15.98);
+        Sales_data s4(cin);
+
+        print(cout, s1) << endl; print(cout, s2) << endl;
+        print(cout, s3) << endl; print(cout, s4) << endl;
+    }
+
+    // 7.13
+    {
+        Sales_data total(cin);
+        if(cin) {
+            while(true) {
+                Sales_data trans(cin);
+                if(cin) {
+                    if(trans.isbn() == total.isbn()) {
+                        total.combine(trans);
+                    } else {
+                        print(cout, total) << endl;
+                        total = trans;
+                    }
+                } else {
+                    break;
+                }
+            }
+            print(cout, total);
+        } else {
+            std::cerr << "No data?!" << endl;
+        }
+    }
 
     return 0;
 }

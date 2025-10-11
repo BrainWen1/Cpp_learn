@@ -5,6 +5,14 @@
 #include <string>
 
 struct Person {
+    // 构造函数
+    Person() : name(), address() {}
+
+    Person(std::string na) : name(na) {}
+
+    Person(std::string na, std::string ad)
+        : name(na), address(ad) {}
+
     // 成员函数
 
 
