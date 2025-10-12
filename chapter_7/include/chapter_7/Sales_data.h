@@ -1,6 +1,8 @@
 #ifndef SALES_DATA_H
 #define SALES_DATA_H
 
+// #define NDEBUG
+
 #include <string>
 #include <iostream>
 
@@ -10,14 +12,32 @@ class Sales_data {
     friend std::istream &read(std::istream &is, Sales_data &item);
 public:
     // 构造函数
-    Sales_data() : bookNo(), units_sold(0), revenue(0.0) {}
-
-    Sales_data(const std::string &s) : bookNo(s) {}
-
     Sales_data(const std::string s, const unsigned n, const double p)
-        : bookNo(s), units_sold(n), revenue(n * p) {}
+        : bookNo(s), units_sold(n), revenue(n * p) {
+            #ifndef NDEBUG
+            std::cout << "Sales_data(const std::string s, const unsigned n, const double p)" << std::endl;
+            #endif // NDEBUG
+        }
 
-    Sales_data(std::istream &is) { read(is, *this); }
+    Sales_data() : Sales_data("", 0, 0.0) {
+        #ifndef NDEBUG
+        std::cout << "Sales_data()" << std::endl;
+        #endif // NDEBUG
+    }
+
+    explicit Sales_data(const std::string &s) : Sales_data(s, 0, 0.0) {
+        #ifndef NDEBUG
+        std::cout << "Sales_data(const std::string &s)" << std::endl;
+        #endif // NDEBUG
+    }
+
+    explicit Sales_data(std::istream &is) : Sales_data() {
+        #ifndef NDEBUG
+        std::cout << "Sales_data(std::istream &is)" << std::endl;
+        #endif // NDEBUG
+        
+        read(is, *this);
+    }
     // 操作
     std::string isbn() const { return bookNo; }
 

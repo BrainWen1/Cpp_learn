@@ -8,6 +8,11 @@
 class Window_mgr {
 public:
     using ScreenIndex = std::vector<Screen>::size_type;
+    using pos = std::string::size_type;
+
+    Window_mgr() = default;
+
+    Window_mgr(pos ht, pos wd, char ch = ' ') : screens({Screen(ht, wd, ch)}) {}
 
     void clear(ScreenIndex idx);
 
@@ -23,7 +28,7 @@ class Screen {
 public:
     using pos = std::string::size_type; // 类型成员
 
-    Screen() : contents(), cursor(0), height(0), width(0) {}
+    Screen() = default;
     
     Screen(pos ht, pos wd, char ch = ' ')
         : contents(ht * wd, ch), height(ht), width(wd) {}
