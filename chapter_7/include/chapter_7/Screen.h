@@ -11,6 +11,8 @@ public:
 
     void clear(ScreenIndex idx);
 
+    ScreenIndex addScreen(const Screen & s);
+
 private:
     std::vector<Screen> screens{Screen(24, 80, ' ')};
 
@@ -74,6 +76,11 @@ inline Screen &Screen::set(pos row, pos col, char ch) {
 inline void Window_mgr::clear(ScreenIndex idx) {
     Screen &s = screens[idx];
     s.contents = std::string(s.height * s.width, ' ');
+}
+
+inline auto Window_mgr::addScreen(const Screen &s) -> ScreenIndex {
+    screens.push_back(s);
+    return screens.size() - 1;
 }
 
 #endif // SCRREN_H
