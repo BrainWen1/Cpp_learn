@@ -35,4 +35,12 @@ Sales_data add(const Sales_data &lhs, const Sales_data &rhs);
 std::ostream &print(std::ostream &os, const Sales_data &item);
 std::istream &read(std::istream &is, Sales_data &item);
 
+inline double Sales_data::avg_price() const {
+    if(units_sold != 0) {
+        return revenue / units_sold;
+    } else {
+        return 0;
+    }
+}
+
 #endif // SALES_DATA_H
