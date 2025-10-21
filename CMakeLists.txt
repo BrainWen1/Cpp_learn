@@ -1,5 +1,5 @@
 # 1. 最低CMake版本（必须第一行）
-cmake_minimum_required(VERSION 4.1.0)
+cmake_minimum_required(VERSION 3.10.0)
 
 # 2. 项目声明（名称、版本、语言）
 project(cmake_study VERSION 1.0 LANGUAGES CXX)
