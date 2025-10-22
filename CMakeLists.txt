@@ -1,6 +1,11 @@
 # 1. 最低CMake版本（必须第一行）
 cmake_minimum_required(VERSION 3.10.0)
 
+# 设置「策略版本范围」（可选，让高版本 CMake 遵循指定范围的行为规则）
+if(POLICY CMP0000)  # CMP0000 是 CMake 策略系统的“基础策略”，确保该机制能生效
+    cmake_policy(VERSION 3.10...3.25)
+endif()
+
 # 2. 项目声明（名称、版本、语言）
 project(cmake_study VERSION 1.0 LANGUAGES CXX)
 
@@ -32,7 +37,8 @@ endif()
 # add_subdirectory(chapter_6)
 # add_subdirectory(chapter_7)
 # add_subdirectory(chapter_8)
-add_subdirectory(chapter_9)
+# add_subdirectory(chapter_9)
+add_subdirectory(chapter_10)
 
 # 7. 代码格式化工具（ClangFormat）- 全局工具配置
 find_program(CLANG_FORMAT_EXECUTABLE clang-format)
