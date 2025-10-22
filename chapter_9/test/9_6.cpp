@@ -3,9 +3,10 @@
 #include <stack>
 #include <queue>
 #include <vector>
+#include <string>
 
 int main(void) {
-    std::queue<int> q;;
+    std::queue<int> q;
     std::priority_queue<int> pq;
     std::stack<int> st;
 
