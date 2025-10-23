@@ -2,14 +2,14 @@
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
 # 2. 添加可执行目标（当前目录的源文件）
-set(CURRENT 10_2)
+set(CURRENT 10_3)
 set(MAIN_FILE test/${CURRENT}.cpp)
-# set(SOURCE_FILES src/chapter_8/Sales_data.cpp)
+set(SOURCE_FILES src/chapter_10/Sales_data.cpp)
 # set(SOURCE_FILE ${current}.cpp)
 set(project_name ${CURRENT})
 
 # add_executable(${project_name} ${MAIN_FILE})
-add_executable(${project_name} ${MAIN_FILE})
+add_executable(${project_name} ${MAIN_FILE} ${SOURCE_FILES})
 
 # 3. 目标专属编译选项（警告、优化等，仅对当前目录的目标生效）
 # 针对GCC/Clang添加严格警告
