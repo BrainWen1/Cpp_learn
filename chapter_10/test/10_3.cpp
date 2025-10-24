@@ -4,6 +4,7 @@
 #include <string>
 #include <algorithm>
 #include "chapter_10/Sales_data.h"
+#include <functional>
 
 bool isShorter(const std::string &s1, const std::string &s2) {
     return s1.size() < s2.size();
@@ -36,6 +37,19 @@ bool compareIsbn(const Sales_data &item1, const Sales_data &item2) {
 bool check_size(const std::string &s) {
     constexpr std::size_t sz = 5;
     return s.size() >= sz;
+}
+
+bool check_size_1(const std::string &s, std::string::size_type sz = 5) {
+    return s.size() >= sz;
+}
+
+bool check_size_2(const int val, std::string &s) {
+    if(val <= 0) {
+        return false;
+    } else {
+        auto num = static_cast<decltype(s.size())> (val);
+        return num > s.size();
+    }
 }
 
 void biggies(std::vector<std::string> &svec, std::vector<std::string>::size_type sz) {
@@ -87,6 +101,30 @@ void biggies_2(std::vector<std::string> &svec, std::vector<std::string>::size_ty
         std::cout << s << " ";
     });
     std::cout << std::endl;
+}
+
+void biggies_3(std::vector<std::string> &svec, std::vector<std::string>::size_type sz) {
+    elimDups(svec);
+    std::stable_sort(svec.begin(), svec.end(), isShorter);
+
+    auto f = std::bind(check_size_1, std::placeholders::_1, sz);
+
+    auto wc = std::partition(svec.begin(), svec.end(), f);
+
+    auto count = wc - svec.begin();
+    std::cout << count << " words of length " << sz << " or longer" << std::endl;
+    std::for_each(svec.begin(), wc, [](const std::string &s) -> void {
+        std::cout << s << " ";
+    });
+    std::cout << std::endl;
+}
+
+void print_string(const std::string &s1, const std::string &s2, const std::string &s3) {
+    std::cout << s1 << " " << s2 << " " << s3 << std::endl;
+}
+
+void print_1(std::ostream &os, const int i, const int j) {
+    os << i << " " << j << std::endl;
 }
 
 int main(void) {
@@ -252,6 +290,104 @@ int main(void) {
 
     // 可变lambda
     std::cout << "-------------------------" << std::endl;
+    int v5 = 5;
+    auto f5 = [v5]() mutable -> int { return ++v5; };
+    std::cout << f5() << std::endl;
+    std::cout << f5() << std::endl;
+
+    // 10.3.3
+    // 10.20
+    std::cout << "-------------------------" << std::endl;
+    svec = std::vector<std::string>{
+        "the", "quick", "red", "fox", "jumps",
+        "over", "the", "slow", "red", "turtle"
+    };
+    print(svec) << std::endl;
+
+    size_t count = std::count_if(svec.begin(), svec.end(), [](const std::string &s) -> bool {
+        constexpr std::size_t sz = 4;
+        return s.size() >= sz;
+    });
+    std::cout << count << " words of length 4 or longer" << std::endl;
+
+    // 10.21
+    std::cout << "-------------------------" << std::endl;
+    int c = 4;
+    auto f6 = [&c]() -> bool {
+        if(c <= 0) {
+           return false; 
+        } else {
+            --c;
+            return true;
+        }
+    };
+    while(true) {
+        if(f6()) {
+            std::cout << c << " ";
+        } else {
+            std::cout << "zero reached";
+            break;
+        }
+    }
+    std::cout << std::endl;
+
+    // 参数绑定
+    std::cout << "-------------------------" << std::endl;
+    using namespace std::placeholders;
+    auto f7 = std::bind(check_size_1, _1, 5);
+    std::cout << std::boolalpha << f7("hello world") << std::endl;
+    std::cout << std::boolalpha << f7("hi") << std::endl;
+
+    // bind的参数
+    std::cout << "-------------------------" << std::endl;
+    auto f8 = std::bind(print_string, _2, _1, _3);
+    std::string str = "hello";
+    f8("world", str, "!");
+    f8("!", str, "world");
+
+    // bind重排参数顺序
+    std::cout << "-------------------------" << std::endl;
+    svec = std::vector<std::string>{
+        "the", "quick", "red", "fox", "jumps",
+        "over", "the", "slow", "red", "turtle"
+    };
+    print(svec) << std::endl;
+    std::stable_sort(svec.begin(), svec.end(), std::bind(isShorter, _2, _1));
+    print(svec) << std::endl;
+    std::stable_sort(svec.begin(), svec.end(), isShorter);
+    print(svec) << std::endl;
+
+    // 绑定引用参数 ref cref
+    std::cout << "-------------------------" << std::endl;
+    auto f9 = std::bind(print_1, std::ref(std::cout), 21, 73);
+    f9();
+
+    // 10.3.4
+    // 10.22
+    std::cout << "-------------------------" << std::endl;
+    svec = std::vector<std::string>{
+        "the", "quick", "red", "fox", "jumps",
+        "over", "the", "slow", "red", "turtle"
+    };
+    count = std::count_if(svec.begin(), svec.end(), check_size);
+    std::cout << count << " words of length 4 or longer" << std::endl;
+
+    // 10.24
+    std::cout << "-------------------------" << std::endl;
+    str = "hello !";
+    std::vector<int> ivec{1, 2, 3, 6, 7, 8, 5, 0, 9, 4};
+    auto f10 = std::bind(check_size_2, _1, std::ref(str));
+
+    auto iter = std::find_if(ivec.begin(), ivec.end(), f10);
+    std::cout << *iter << std::endl;
+
+    // 10.25
+    std::cout << "-------------------------" << std::endl;
+    svec = std::vector<std::string>{
+        "the", "quick", "red", "fox", "jumps",
+        "over", "the", "slow", "red", "turtle"
+    };
+    biggies_3(svec, 5);
 
     return 0;
 }
