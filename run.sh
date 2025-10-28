@@ -22,7 +22,7 @@ cmake_file="${chapter_dir}/CMakeLists.txt"
 
 # 检查是否在 bin 目录下
 if [ "$(basename "$bin_dir")" != "bin" ]; then
-    printf "${RED}Error: Please step into bin/.${RESET}\n"
+    printf "${RED}Error: Please step into bin directory.${RESET}\n"
     exit 1
 fi
 
