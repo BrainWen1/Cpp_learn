@@ -6,10 +6,18 @@
 #include <memory>
 #include <stdexcept> // std::out_of_range
 
+class StrBlobPtr;
+class Const_StrBlobPtr; // 前向声明
+
+// // // // StrBlob // // // //
+
 class StrBlob {
+    friend class StrBlobPtr; // 让 StrBlobPtr 访问 StrBlob 的私有成员
+    friend class Const_StrBlobPtr;
 public:
     using size_type = std::vector<std::string>::size_type;
-    StrBlob() = default;
+
+    StrBlob() : data(std::make_shared<std::vector<std::string>>()) {}
     StrBlob(std::initializer_list<std::string> il) : data(std::make_shared<std::vector<std::string>>(il)) {}
 
     size_type size() const { return data->size(); }
@@ -23,40 +31,47 @@ public:
     const std::string& front() const;
     const std::string& back() const;
 
+    StrBlobPtr begin() ;
+    StrBlobPtr end();
+    const Const_StrBlobPtr begin() const;
+    const Const_StrBlobPtr end() const;
+
 private:
     std::shared_ptr<std::vector<std::string>> data;
     void check(size_type i, const std::string &msg) const;
 };
 
-void StrBlob::check(size_type i, const std::string &msg) const {
-    if (i >= data->size()) {
-        throw std::out_of_range(msg);
-    }
-}
+// // // // StrBlobPtr // // // //
 
-std::string& StrBlob::front() {
-    check(0, "front on empty StrBlob");
-    return data->front();
-}
+class StrBlobPtr {
+public:
+    StrBlobPtr() : wptr(), curr(0) {}
+    StrBlobPtr(StrBlob &a, size_t sz = 0) : wptr(a.data), curr(sz) {}
 
-std::string& StrBlob::back() {
-    check(0, "back on empty StrBlob");
-    return data->back();
-}
+    std::string &derefer() const;
+    StrBlobPtr &increase();
 
-const std::string& StrBlob::front() const {
-    check(0, "front on empty StrBlob");
-    return data->front();
-}
+private:
+    std::shared_ptr<std::vector<std::string>> check(std::size_t, const std::string&) const;
 
-const std::string& StrBlob::back() const {
-    check(0, "back on empty StrBlob");
-    return data->back();
-}
+    std::weak_ptr<std::vector<std::string>> wptr;
+    std::size_t curr;
+};
 
-void StrBlob::pop_back() {
-    check(0, "pop_back on empty StrBlob");
-    data->pop_back();
-}
+// // // // Const StrBlobPtr // // // //
 
+class Const_StrBlobPtr {
+public:
+    Const_StrBlobPtr() : wptr(), curr(0) {}
+    Const_StrBlobPtr(const StrBlob &a, size_t sz = 0) : wptr(a.data), curr(sz) {}
+
+    const std::string &derefer() const;
+    Const_StrBlobPtr &increase();
+
+private:
+    std::shared_ptr<std::vector<std::string>> check(std::size_t, const std::string&) const;
+
+    std::weak_ptr<std::vector<std::string>> wptr;
+    std::size_t curr;
+};
 #endif // STRBLOB_H

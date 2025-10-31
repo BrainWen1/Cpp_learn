@@ -5,6 +5,8 @@
 #include <string>
 #include <new> // std::nothrow
 #include <fstream>
+#include <sstream>
+#include "chapter_12/StrBlob.h"
 
 std::vector<int> *ReturnVector() {
     std::vector<int> *p = new std::vector<int>();
@@ -224,6 +226,29 @@ int main(void) {
     } else {
         std::cout << "wp1 is expired." << std::endl;
     }
+
+    // 12.1.6
+    // 12.20
+    std::ifstream in("../test/txt/12_1StrB.txt");
+    if(!in) {
+        std::cerr << "Cannot open input file!" << std::endl;
+        return -1;
+    }
+
+    StrBlob sb;
+    std::string line, word;
+    while(std::getline(in, line)) {
+        std::istringstream iss(line);
+        while(iss >> word) {
+            sb.push_back(word);
+        }
+    }
+
+    StrBlobPtr it = sb.begin();
+    for(size_t i = 0; i != sb.size(); ++i, it.increase()) {
+        std::cout << it.derefer() << " ";
+    }
+    std::cout << std::endl;
 
     return 0;
 }
