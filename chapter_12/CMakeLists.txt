@@ -4,7 +4,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 # 2. 添加可执行目标（当前目录的源文件）
 set(CURRENT 12_3)
 set(MAIN_FILE test/${CURRENT}.cpp)
-set(SOURCE_FILES src/chapter_12/TextQuery.cpp)
+set(SOURCE_FILES src/chapter_12/TextQuery_StrBlob.cpp src/chapter_12/StrBlob.cpp)
 set(project_name ${CURRENT})
 
 # add_executable(${project_name} ${MAIN_FILE})
