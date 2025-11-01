@@ -33,12 +33,8 @@ QueryResult_StrBlob TextQuery_StrBlob::query(const std::string &sought) const {
     }
 }
 
-std::string make_plural(size_t i, const std::string &word, const std::string &ending) {
-    return (i > 1) ? (word + ending) : word;
-}
-
 std::ostream &print(std::ostream &os, QueryResult_StrBlob &qr) {
-    os << qr.sought << " occurs " << qr.lines->size() << " " << make_plural(qr.lines->size(), "time", "s") << std::endl;
+    os << qr.sought << " occurs " << qr.lines->size() << " " << (qr.lines->size() > 1 ? "times" : "times") << std::endl;
 
     auto it = qr.file.begin();
     for(const auto &num : *qr.lines) {
