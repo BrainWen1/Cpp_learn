@@ -4,6 +4,17 @@
 #include <string>
 #include <vector>
 
+struct X {
+    X() { std::cout << "X()" << std::endl; }
+    X(const X&) { std::cout << "X(const X&)" << std::endl; }
+
+    X &operator=(const X&) {
+        std::cout << "X &operator=(const X&)" << std::endl;
+        return *this;
+    }
+    ~X() { std::cout << "~X()" << std::endl; }
+};
+
 int main(void) {
     // 13.1.1
     // 13.3
@@ -44,6 +55,30 @@ int main(void) {
     //     std::cout << ptr4.derefer() << " ";
     // }
     // std::cout << std::endl;
+
+    // 13.11
+    {
+        StrBlob sb5{"Temporary", "StrBlob", "object"};
+        StrBlobPtr ptr5 = sb5.begin();
+    }
+
+    // 13.13
+    {
+        std::cout << "-------------------------------" << std::endl;
+        X x1;
+        X x2 = x1; // 调用拷贝构造函数
+        X x3;
+        x3 = x1;   // 调用赋值运算符
+
+        X *px = new X();
+        X *px2 = new X(*px); // 调用拷贝构造函数
+        *px2 = x1;           // 调用赋值运算符
+        delete px;
+        delete px2;
+
+        std::vector<X> vec;
+        vec.push_back(x1); // 调用拷贝构造函数
+    }
 
     return 0;
 }

@@ -17,6 +17,8 @@ public:
         return *this;
     }
 
+    ~HasPtr() { delete ps; } // 析构函数
+
 private:
     std::string *ps;
     int i;
