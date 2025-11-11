@@ -15,6 +15,47 @@ struct X {
     ~X() { std::cout << "~X()" << std::endl; }
 };
 
+// 13.1.4
+// 13.17
+class number {
+public:
+    number() : mysn(++i) {} // 每创建一个对象，mysn都会被赋予一个唯一的序号
+    number(const number &n) : mysn(++i) {} // 拷贝构造函数，同样分配一个新的序号
+
+    static size_t i; // 静态数据成员, 所有对象共享
+    size_t mysn;
+};
+
+size_t number::i = 0;
+
+void f(const number &s) {
+    std::cout << s.mysn << std::endl;
+}
+
+// 13.1.6
+// 13.18
+class Employee {
+public:
+    Employee() : id(++id_generator) {} // 默认构造函数
+    Employee(const std::string &emp_name) : name(emp_name), id(++id_generator) {}
+
+    Employee(const Employee &e) : name(e.name), id(++id_generator) {} // 拷贝构造函数
+
+    Employee &operator=(const Employee &e) { // 赋值运算符
+        if (this != &e) {
+            name = e.name;
+        }
+        return *this;
+    }
+
+private:
+    static size_t id_generator;
+    std::string name;
+    size_t id;
+};
+
+size_t Employee::id_generator = 0;
+
 int main(void) {
     // 13.1.1
     // 13.3
@@ -79,6 +120,14 @@ int main(void) {
         std::vector<X> vec;
         vec.push_back(x1); // 调用拷贝构造函数
     }
+
+    // 13.1.4
+    // 13.17
+    std::cout << "-------------------------------" << std::endl;
+    number a, b = a, c = b;
+    f(a);
+    f(b);
+    f(c);
 
     return 0;
 }
